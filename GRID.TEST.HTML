@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<style>
+/*
+  CSS Selectors
+  - :not(Selectors)
+  - :nth-child(n)
+  - :nth-last-child(n)
+  - :nth-of-type(n)
+  - :nth-last-of-type(n)
+
+    - :first-child
+  - :last-child
+  - :first-of-type
+  - :last-of-type
+  - :only-child
+
+    - Element + Other Element => [div + p]
+  - Element ~ Other Elements => [p ~ div]
+  - [Attribute]
+  - Element[Attribute]
+  - [Attribute=Value]
+  - Element[Attribute=Value] => input[type="submit"]
+  - [Attribute~=Value] => Contains A Word
+  - [Attribute*=Value] => Contains A Atring
+  - [Attribute^=Value] => Start With A String
+*/
+
+
+/* Mobile */
+
+@media (max-width: 767px) {
+}
+
+/* Small Screens */
+
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+/* Medium Screens */
+
+@media (min-width: 992px) {
+}
+
+/* Large Screens */
+
+@media (min-width: 1200px) {
+}
+
+
+
+  .parent{
+    margin: 20px auto;
+    background-color: white;
+    width: 800px;
+    height: 500px;
+
+    display: grid;
+    grid-template-columns: repeat(3 , 100px) ;
+    /* auto is shy (only takes the space that it needs for the letter)
+    fracion or fr is greedy (takes all of the remaing space) */
+
+    grid-template-rows: 100px 100px 100px auto /*1fr*/; 
+    row-gap: 10px;
+    column-gap: 5px;
+    justify-content: space-evenly;
+    align-content: space-between;
+    /* align-items: center; */
+  }
+
+  .parent div {
+    background-color: rgb(166, 100, 228);
+    padding: 20px;
+    font-size: 30px;
+
+  }
+
+
+
+
+
+  .parent2{
+    margin: 20px auto;
+    background-color: white;
+    width: 800px;
+    height: 500px;
+    grid-template-areas: "logo logo logo " "cont cont cont ";
+    display: grid;
+    grid-template-columns: repeat(4 , 100px) ;
+    /* auto is shy (only takes the space that it needs for the letter)
+    fracion or fr is greedy (takes all of the remaing space) */
+
+    grid-template-rows: 100px 100px 100px 100px ; 
+    row-gap: 5px;
+    column-gap: 5px;
+
+  }
+
+  .parent2 div {
+    background-color: rgb(228, 100, 190);
+    padding: 20px;
+    font-size: 30px;
+
+  }
+
+
+
+  .parent3{
+    margin: 20px auto;
+    background-color: white;
+    margin: 20 auto;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(200px , 1fr)) ;
+    /* grid-template-rows: 100px 100px 100px 100px ;   لو خليت دا راح يحدد طول الشكل عندي بدال ما يعبي لين الجدول اللي بعدو*/
+
+
+  }
+
+  .parent3 div {
+    background-color: rgb(228, 100, 100);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+
+  }
+
+
+
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+ul{
+  list-style: none;
+}
+
+ul li{
+  display: inline-block;
+}
+
+.page{
+  height: 100vh;
+  background-color: #eeee;
+
+  display: grid;
+  grid-template-columns: repeat(10 , 1fr);
+  grid-template-rows: 50px auto 50px;
+  grid-template-areas: 
+  "logo logo nav nav nav nav nav nav nav nav"
+  "cont cont cont cont cont cont cont .  side side"
+  "fot fot fot fot fot fot fot fot fot fot";
+}
+
+h2{
+  grid-area: logo;
+  background-color: aquamarine;
+}
+nav{
+  grid-area: nav;
+  background-color: rgba(127, 255, 212, 0.438);
+}
+section{
+  grid-area: cont;
+  background-color: rgb(127, 225, 255);
+}
+aside{
+  grid-area: side;
+  background-color: rgba(127, 219, 255, 0.589);
+}
+footer{
+  grid-area: fot;
+  background-color: rgb(103, 250, 115);
+}
+
+
+.scale{
+transform: scale(1,1);
+}
+
+
+.skew{
+  color: white;
+  background-color: red;
+  position: relative;
+  margin: 20px auto;
+  width: fit-content;
+  padding: 15px;
+  transform: skewX(20deg);  
+}
+.skew ::before{
+  content: "";
+  background-color: red;
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform: skewX(20deg);
+}
+
+
+
+
+.cont{
+  width: 200px;
+  margin: 40px auto;
+
+}
+.box{
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d; /* دا يحول الشكل من 
+                                   2D TO 3D */
+  transition: /* transform  */ 1s;
+  transform-origin: right center;
+  perspective: 600px;
+}
+.box:hover{
+  transform: translateX(-100%) rotateY(-180deg); /* هما اللي يخلو كل شي يلف وحركات بركات */
+}
+.box .face{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: aliceblue;
+  backface-visibility: hidden; /* دا مره مهم يخلينا نقدر الجهه الاماميه */
+}
+.front{
+  background-color: rebeccapurple;
+}
+.back{
+  background-color: green;
+  transform: rotateY(180deg); /* يخلي الاخضر يلف 180 درجه 
+  على اساس يصير ورا ونشوفو وقت ما يدور الشكل */
+}
+
+
+
+
+.D3{
+  width: 200px;
+  height: 200px;
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  margin: 5%;
+  transition: 0.5s;
+  transform: translate3d(50px , 22px , 59px);
+
+
+}
+.dd3{
+    perspective: 300px;
+    perspective-origin: top left;  
+    /* لازم ما يكون فنفس الديف اللي موجود فيه الشكل perspectiveال 
+   كبير زي300 كل ما كبر الرقم كل ما صغر الشكل perspective-origin ولازم يكون فيه رقم 
+   لانو يعبر عن المسافه بينك وبين الشكل*/
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.grid-item {
+  background-color: #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+.span-new-row {
+  grid-column: span 2; /* Spans 2 rows */
+}
+
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Default column sizes for all rows */
+  grid-gap: 10px;
+}
+
+.grid-item {
+  background-color: #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Custom column sizes for the second row */
+.grid-container > :nth-child(2) {
+  grid-column: span 2;
+}
+
+/* Custom column sizes for the third row */
+.grid-container > :nth-child(3) {
+  grid-column: span 3;
+}
+
+
+
+</style>
+<html>
+    <head>
+      <meta charset="UTF-8"
+    </head>
+
+    <body>
+      <!-- <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7</div>
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+        <div class="grid-item">10</div>
+        <div class="grid-item span-new-row">11 (New Row)</div>
+      </div> -->
+
+      
+
+      <div class="grid-container">
+        <div class="grid-item">1</div>
+        <div class="grid-item">2</div>
+        <div class="grid-item">3</div>
+        <div class="grid-item">4</div>
+        <div class="grid-item">5</div>
+        <div class="grid-item">6</div>
+        <div class="grid-item">7 (New)</div> <!-- New item in the second row -->
+        <div class="grid-item">8</div>
+        <div class="grid-item">9</div>
+        <div class="grid-item">10 (New)</div> <!-- New item in the third row -->
+      </div>
+      
+
+        <div class="parent">
+            <div style="grid-column: 1/3;">1</div>
+            <div >2</div>
+            <div style="grid-column: span 2;">3</div>
+            <div>4</div>
+            <div>5</div>
+            <div>6</div>
+            <div>7</div>
+            <div style="grid-row: span 3;">8</div>
+            <div>9</div>
+            <div>9</div>
+        </div>
+
+
+
+
+        <div class="parent2">
+          <div style="grid-area: logo;">1</div>
+          <div >2</div>
+          <div style="grid-area: cont;">3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div >8</div>
+          <div>9</div>
+
+
+      </div>
+
+
+        <div class="parent3">
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div >8</div>
+          <div>9</div>
+
+
+      </div>
+
+
+       <div class="scale" style="width: 200px; transform: scale(-3 , 2); position: relative; left: 100px; padding: 60px;">
+        <p style="background-color: hotpink; width: 100px; height: 100px; text-align: center; color: white;font-weight: bolder; font-size: 50px; margin-top: 0px;align-items: center; display: flex; justify-content: center;">
+          test</p>
+       </div>
+
+
+
+       <div class="scale" style="width: 200px; transform: translate(10px , -30px); position: relative; left: 100px; padding: 60px;">
+        <p style="background-color: hotpink; width: 100px; height: 100px; text-align: center; color: white;font-weight: bolder; font-size: 50px; margin-top: 0px;align-items: center; display: flex; justify-content: center;">
+          test</p>
+       </div>
+
+
+
+        <div>
+        <h3 class="skew">Test Title</h3>
+
+        </div>
+        
+        
+
+
+        <div class="cont">
+          <div class="box">
+            <div class="face front">front</div>
+            <div class="face back">back</div>
+          </div>
+        </div>
+
+
+
+
+
+
+        
+        <div class="dd3">
+        <div class="D3">
+          transform
+        </div></div>
+
+
+        <div class="page">
+          <h2>elzero</h2>
+
+          <nav>
+            <ul>
+              <li>home</li>
+              <li>about</li>
+              <li>serve</li>
+              <li>content</li>
+            </ul>
+          </nav>
+
+          <section>CONTENT</section>
+
+          <aside>sidbar</aside>
+
+          <footer>footer</footer>
+        </div>
+
+
+
+
+
+
+    </body>
+</html>
+
+<!-- webkit-transfor = نحطها كل ما نبا نتسعمل اي ترانسفورم عشان المتتصفح يتعرف عليه
+بشكل عام, الويب كيت موجود عشان كل المتصفحات (ويبات) تقدر تتعرف عالاشياء
+-->
